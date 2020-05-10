@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 const { kitties } = require('./datasets/kitties');
 const { clubs } = require('./datasets/clubs');
 const { mods } = require('./datasets/mods');
@@ -27,21 +28,35 @@ const kittyPrompts = {
 
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = []
+    
+    kitties.forEach((kitty) => {
+      kitty.color === 'orange' ? result.push(kitty.name) : false
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+
+    /* 
+    iterate over kitty array
+    look at the color property of kitties
+    return only the orange kitties
+    */
+    
   },
 
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.sort((a, b) => b.age - a.age)
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    /*
+    iterate over kitties
+    return the kitties sorted by age
+    */
   },
 
   growUp() {
@@ -58,7 +73,13 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = []
+
+    this.sortByAge().forEach((kitty) => {
+      kitty.age += 2
+      result.push(kitty)
+    });
+
     return result;
   }
 };
@@ -90,11 +111,54 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, club) => {
+      club.members.forEach((member) => {
+        if (!acc[member]) {
+          acc[member] = []
+        }
+
+        if (!acc[member].includes(club.club)) {
+          acc[member].push(club.club)
+        }
+      })
+      return acc
+    }, {})
+
+    // const result = {}
+
+    // clubs.forEach((club) => {
+    //   club.members.forEach((member) => {
+    //     if (!result[member]) {
+    //       result[member] = []
+    //     }
+    //   })
+    // })
+
+    // const resultKeys = Object.keys(result)
+
+    // resultKeys.forEach((key) => {
+    //   clubs.forEach((club) => {
+    //     if (club.members.includes(key)) {
+    //       result[key].push((club.club))
+    //     }
+    //   })
+    // })
+
+    //reduce on clubs
+    //the acc would be the result object
+    //
+
+
+
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    /*
+   
+
+    
+    */
   }
 };
 
@@ -126,7 +190,13 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.reduce((acc, mod) => {
+      acc.push({
+        'mod': mod.mod,
+        'studentsPerInstructor': mod.students / mod.instructors
+      })
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -161,7 +231,13 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      acc.push({
+        'flavor': cake.cakeFlavor,
+        'inStock': cake.inStock
+      })
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -189,7 +265,7 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter((cake) => cake.inStock);
     return result;
 
     // Annotation:
@@ -200,7 +276,10 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      acc += cake.inStock
+      return acc
+    }, 0);
     return result;
 
     // Annotation:
@@ -212,7 +291,14 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach((topping) => {
+        if (!acc.includes(topping)) {
+          acc.push(topping)
+        }
+      })
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -230,7 +316,19 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach((topping) => {
+        if (!acc[topping]) {
+          acc[topping] = 1
+        }
+
+        else {
+          acc[topping]++
+        }
+      })
+
+      return acc
+    }, {});
     return result;
 
     // Annotation:
@@ -265,7 +363,12 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((acc, classroom) => {
+      if (classroom.program === 'FE') {
+        acc.push(classroom)
+      }
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -280,7 +383,9 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((acc, classroom) => {
+
+    }, {});
     return result;
 
     // Annotation:
@@ -385,7 +490,10 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, club) => {
+
+
+    }, {});
     return result;
 
     // Annotation:
