@@ -384,7 +384,19 @@ const classPrompts = {
     // }
 
     const result = classrooms.reduce((acc, classroom) => {
+      if (!acc['beCapacity'] && classroom.program === 'BE') {
+        acc['beCapacity'] = 0
+      }
 
+      if (!acc['feCapacity'] && classroom.program === 'FE') {
+        acc['feCapacity'] = 0
+      }
+
+      classroom.program === 'BE' ? 
+        acc['beCapacity'] += classroom.capacity : 
+        acc['feCapacity'] += classroom.capacity
+
+      return acc
     }, {});
     return result;
 
