@@ -294,7 +294,7 @@ describe("PROTOTYPES", () => {
         parksVisited: [ 'Rocky Mountain', 'Acadia', 'Zion' ]
       })
     }),
-    it.skip("getParkActivities", () => {
+    it("getParkActivities", () => {
       const e = nationalParksPrompts.getParkActivities();
       expect(e).to.deep.equal(
       [ 'hiking',
@@ -325,7 +325,7 @@ describe("PROTOTYPES", () => {
     })
   }),
   describe("Brewery Prompts", () => {
-    it.skip("getBeerCount", () => {
+    it("getBeerCount", () => {
       const e = breweryPrompts.getBeerCount();
       expect(e).to.deep.equal(40)
     }), it.skip("getBreweryBeerCount", () => {
