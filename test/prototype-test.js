@@ -200,7 +200,7 @@ describe("PROTOTYPES", () => {
         feCapacity: 110,
         beCapacity: 96
       })
-    }), it.skip("sortByCapacity", () => {
+    }), it("sortByCapacity", () => {
       const e = classPrompts.sortByCapacity();
       expect(e).to.deep.equal([{
         roomLetter: "H",
@@ -238,7 +238,7 @@ describe("PROTOTYPES", () => {
     })
   }),
   describe("Book prompts", () => {
-    it.skip("removeViolence", () => {
+    it("removeViolence", () => {
       const e = bookPrompts.removeViolence();
       expect(e).to.deep.equal(['1984',
         'The Great Gatsby',
@@ -255,7 +255,7 @@ describe("PROTOTYPES", () => {
         'Catch-22',
         'Treasure Island'])
     }),
-    it.skip("getNewBooks", () => {
+    it("getNewBooks", () => {
       const e = bookPrompts.getNewBooks();
       expect(e).to.deep.equal([{
         title: 'Harry Potter and the Sorcerer\'s Stone', year: 1997 },
@@ -265,18 +265,18 @@ describe("PROTOTYPES", () => {
     })
   }),
   describe("Weather prompts", () => {
-    it.skip("getAverageTemps", () => {
+    it("getAverageTemps", () => {
       const e = weatherPrompts.getAverageTemps();
       expect(e).to.deep.equal([
         40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5
       ])
     }),
-    it.skip("findSunnySpots", () => {
+    it("findSunnySpots", () => {
       const e = weatherPrompts.findSunnySpots();
       expect(e).to.deep.equal(['Atlanta, Georgia is sunny.', 'New Orleans, Louisiana is sunny.', 'Raleigh, North Carolina is mostly sunny.']
       )
     }),
-    it.skip("findHighestHumidity", () => {
+    it("findHighestHumidity", () => {
       const e = weatherPrompts.findHighestHumidity();
       expect(e).to.deep.equal({
         location: 'Portland, Oregon',
@@ -287,7 +287,7 @@ describe("PROTOTYPES", () => {
     })
   }),
   describe("National Park Prompts", () => {
-    it.skip("getParkVisitList", () => {
+    it("getParkVisitList", () => {
       const e = nationalParksPrompts.getParkVisitList();
       expect(e).to.deep.equal({
         parksToVisit: [ 'Yellowstone', 'Glacier', 'Everglades' ],
@@ -311,7 +311,7 @@ describe("PROTOTYPES", () => {
         'rock climbing'
       ])
     }),
-    it.skip("getParkInEachState", () => {
+    it("getParkInEachState", () => {
       const e = nationalParksPrompts.getParkInEachState();
       expect(e).to.deep.equal(
         [

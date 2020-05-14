@@ -407,7 +407,7 @@ const classPrompts = {
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
     return result;
 
     // Annotation:
@@ -434,7 +434,13 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = []
+
+    books.forEach((book) => {
+      if(book.genre != 'Horror' && book.genre != 'True Crime') {
+        result.push(book.title)
+      }
+    })
     return result;
 
     // Annotation:
@@ -449,7 +455,16 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((acc, book) => {
+      if (book.published > 1989 && book.published < 2010) {
+        acc.push({
+          'title': book.title,
+          'year': book.published
+        })
+      }
+
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -472,7 +487,11 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.reduce((acc, city) => {
+      let averageTemp = (city.temperature.high + city.temperature.low) / 2
+      acc.push(averageTemp)
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -486,7 +505,13 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.reduce((acc, city) => {
+      if (city.type === 'sunny' || city.type === 'mostly sunny') {
+        acc.push(`${city.location} is ${city.type}.`)
+      }
+
+      return acc
+    }, []);
     return result;
 
     // Annotation:
@@ -502,10 +527,7 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = clubs.reduce((acc, club) => {
-
-
-    }, {});
+    const result = weather.sort((a, b) => b.humidity - a.humidity)[0]
     return result;
 
     // Annotation:
@@ -532,7 +554,21 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+      if (park.visited === false && !acc['parksToVisit']) {
+        acc['parksToVisit'] = [];
+      }
+
+      if (park.visited === true && !acc['parksVisited']) {
+        acc['parksVisited'] = [];
+      }
+
+      park.visited === false ? 
+        acc['parksToVisit'].push(park.name) :
+        acc['parksVisited'].push(park.name)
+
+      return acc
+    }, {});
     return result;
 
     // Annotation:
@@ -548,8 +584,16 @@ const nationalParksPrompts = {
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
 
+    // let parkLocation;
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    const result = nationalParks.reduce((acc, park) => {
+      const statePark = {};
+      const parkLocation = park.location
+      statePark[parkLocation] = park.name;
+      acc.push(statePark)
+      return acc
+    }, [])
     return result;
 
     // Annotation:
