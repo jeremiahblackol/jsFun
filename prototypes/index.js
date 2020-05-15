@@ -727,7 +727,15 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.map((instructor) => {
+      let count = 0;
+      cohorts.forEach((cohort) => {
+        if (instructor.module === cohort.module) {
+          count = cohort.studentCount
+        }
+      })
+      return {name: instructor.name, studentCount: count}
+    });
     return result;
 
     // Annotation:
