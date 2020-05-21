@@ -761,11 +761,13 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = cohorts.map((cohort) => {
-      let cohortNum = `cohort${cohort.cohort}`
-      console.log(cohortNum)
-      return {cohortNum: 0}
-    });
+    const result = cohorts.reduce((acc, cohort) => {
+      acc[`cohort${cohort.cohort}`] = cohort.studentCount / instructors.filter((instructor) => {
+        return cohort.module === instructor.module
+      }).length
+
+      return acc
+    }, {})
 
     return result;
 
@@ -788,7 +790,21 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc, instructor) => {
+      if (!acc[instructor.name]) {
+        acc[instructor.name] = []
+      }
+
+      cohorts.forEach((cohort) => {
+        cohort.curriculum.forEach((lesson) => {
+          if (instructor.teaches.includes(lesson) && !acc[instructor.name].includes(cohort.module)) {
+            acc[instructor.name].push(cohort.module)
+          }
+        })
+      })
+
+      return acc
+    }, {})
     return result;
 
     // Annotation:
@@ -989,7 +1005,7 @@ const ultimaPrompts = {
         if (!acc['range']) {
           acc['range'] = 0
         }
-        
+
         acc['damage'] += weapons[weapon].damage
         acc['range'] += weapons[weapon].range
         return acc
