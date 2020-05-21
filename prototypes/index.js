@@ -871,27 +871,41 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    const result = Object.entries(bosses);
+    const result = Object.entries(bosses)
 
-    // let newResult = result.map((boss) => {
-    //   return 
-    // })
+    let newResult = result.reduce((acc, boss) => {
+      let sidekickVar = boss[1].sidekicks.map((sidekick) => sidekick.name)
+      let newKick = sidekickVar.reduce((acc, kick) => {
+        sidekicks.forEach((sidekick) => {
+          if (sidekick.name === kick) {
+            kick = sidekick.loyaltyToBoss
+          }
+        })
+        return acc += kick
+      }, 0)
 
-    // let newResult =result.map((boss) => {
-    //   let bossObj = {}
-    //   bossObj['bossName'] = boss[1].name
-    //   bossObj['sidekickLoyalty'] = boss[1].sidekicks.reduce((acc, kick) => {
-    //     acc += 
-    //   }, 0)
-    //   return bossObj
-    // })
+
+      let bossObject = {
+        'bossName': boss[1].name,
+        'sidekickLoyalty': newKick
+      }
+      acc.push(bossObject)
+      return acc
+    }, [])
+
+
+
 
     
 
-    return newResult;
+    return newResult
+
+
+
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Object.keys(bosses)
+    // 
   }
 };
 
