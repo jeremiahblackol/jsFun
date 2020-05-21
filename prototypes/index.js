@@ -821,7 +821,22 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((acc, cohort) => {
+      cohort.curriculum.forEach((lesson) => {
+        if (!acc[lesson]) {
+          acc[lesson] = []
+        }
+
+        instructors.forEach((instructor) => {
+          if (instructor.teaches.includes(lesson) && !acc[lesson].includes(instructor.name)) {
+            acc[lesson].push(instructor.name)
+          }
+        })
+      })
+
+
+      return acc
+    }, {});
     return result;
 
     // Annotation:
