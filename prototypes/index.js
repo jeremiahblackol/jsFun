@@ -761,7 +761,12 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.map((cohort) => {
+      let cohortNum = `cohort${cohort.cohort}`
+      console.log(cohortNum)
+      return {cohortNum: 0}
+    });
+
     return result;
 
     // Annotation:
@@ -948,7 +953,22 @@ const ultimaPrompts = {
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let weaponArr = [];
+    characters.forEach((character, i) => {
+      character.weapons.forEach((weapon, i) => {
+        weaponArr.push(weapon);
+      });
+    });
+
+    let damagesArr = weaponArr.map(weapon => {
+      return weapons[weapon].damage;
+    })
+
+    let result = damagesArr.reduce((acc, damage) => {
+      acc += damage
+      return acc
+    }, 0);
+
     return result;
 
     // Annotation:
@@ -960,7 +980,28 @@ const ultimaPrompts = {
     // Return the sum damage and total range for each character as an object.
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = characters.reduce((acc, character) => {
+      let characterObject = {}
+      characterObject[character.name] = character.weapons.reduce((acc, weapon) => {
+        if (!acc['damage']) {
+          acc['damage'] = 0
+        }
+        if (!acc['range']) {
+          acc['range'] = 0
+        }
+        
+        acc['damage'] += weapons[weapon].damage
+        acc['range'] += weapons[weapon].range
+        return acc
+      }, {})
+      acc.push(characterObject)
+      return acc
+    }, [])
+
+   
+    console.log(result)
+
+
     return result;
 
     // Annotation:
