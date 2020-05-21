@@ -871,8 +871,24 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = Object.entries(bosses);
+
+    // let newResult = result.map((boss) => {
+    //   return 
+    // })
+
+    // let newResult =result.map((boss) => {
+    //   let bossObj = {}
+    //   bossObj['bossName'] = boss[1].name
+    //   bossObj['sidekickLoyalty'] = boss[1].sidekicks.reduce((acc, kick) => {
+    //     acc += 
+    //   }, 0)
+    //   return bossObj
+    // })
+
+    
+
+    return newResult;
 
     // Annotation:
     // Write your annotation here as a comment
