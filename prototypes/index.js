@@ -874,8 +874,7 @@ const bossPrompts = {
     const result = Object.entries(bosses)
 
     let newResult = result.reduce((acc, boss) => {
-      let sidekickVar = boss[1].sidekicks.map((sidekick) => sidekick.name)
-      let newKick = sidekickVar.reduce((acc, kick) => {
+      let sidekickVar = boss[1].sidekicks.map((sidekick) => sidekick.name).reduce((acc, kick) => {
         sidekicks.forEach((sidekick) => {
           if (sidekick.name === kick) {
             kick = sidekick.loyaltyToBoss
@@ -887,7 +886,7 @@ const bossPrompts = {
 
       let bossObject = {
         'bossName': boss[1].name,
-        'sidekickLoyalty': newKick
+        'sidekickLoyalty': sidekickVar
       }
       acc.push(bossObject)
       return acc
@@ -943,8 +942,18 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = Object.keys(constellations)
+
+    let newResult = stars.reduce((acc, star) => {
+      result.find((constellation) => {
+        if (star.constellation === constellation) {
+          acc.push(star)
+        }
+      })
+      return acc
+    }, [])
+
+    return newResult
 
     // Annotation:
     // Write your annotation here as a comment
